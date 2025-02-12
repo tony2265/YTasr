@@ -2,7 +2,8 @@ import sys
 sys.stdout.reconfigure(encoding='utf-8')
 
 from flask import Flask, request, jsonify
-from ailabs_asr.streaming import StreamingClient
+# from ailabs_asr.streaming import StreamingClient
+from ailabs_asr.file import FileClient
 
 # 初始化 Flask
 app = Flask(__name__)
@@ -22,19 +23,27 @@ def recognize():
     audio_file = request.files['file']
 
     # 開始語音辨識
-    result = []
-    def on_processing_sentence(message):
-        result.append({"partial": message["asr_sentence"]})
+    # result = []
+    # def on_processing_sentence(message):
+    #     result.append({"partial": message["asr_sentence"]})
 
-    def on_final_sentence(message):
-        result.append({"final": message["asr_sentence"]})
+    # def on_final_sentence(message):
+    #     result.append({"final": message["asr_sentence"]})
 
-    asr_client.start_streaming_wav(
-        pipeline='asr-zh-tw-std',
-        file=audio_file,
-        on_processing_sentence=on_processing_sentence,
-        on_final_sentence=on_final_sentence
-    )
+    # asr_client.start_streaming_wav(
+    #     pipeline='asr-zh-tw-std',
+    #     file=audio_file,
+    #     on_processing_sentence=on_processing_sentence,
+    #     on_final_sentence=on_final_sentence
+    # )
+    
+    # 儲存檔案
+    file_path = "/tmp/" + audio_file.filename
+    audio_file.save(file_path)
+
+    # 開始語音辨識
+    result = asr_client.recognize(file_path, pipeline="asr-zh-tw-std")
+
 
     # 回傳辨識結果，包裹成物件格式
     return jsonify({"results": result})
