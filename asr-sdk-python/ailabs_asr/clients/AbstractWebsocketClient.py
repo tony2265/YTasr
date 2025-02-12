@@ -1,5 +1,6 @@
 import os
-os.environ["PA_ALSA_PLUGHW"] = "0" #禁用 PyAudio 的音訊裝置偵測
+os.environ["PA_ALSA_PLUGHW"] = "0"
+os.environ["PA_ALSA_IGNORE"] = "1"  # 這行額外加上 #禁用 PyAudio 的音訊裝置偵測
 
 from abc import ABC, abstractclassmethod
 import wave

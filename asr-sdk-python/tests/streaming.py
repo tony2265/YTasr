@@ -5,9 +5,8 @@ sys.path.append(str(path_root))
 
 from ailabs_asr.streaming import StreamingClient
 import os
-os.environ["PA_ALSA_PLUGHW"] = "0" #禁用 PyAudio 的音訊裝置偵測
-
-import pyaudio
+os.environ["PA_ALSA_PLUGHW"] = "0"
+os.environ["PA_ALSA_IGNORE"] = "1"  # 這行額外加上 #禁用 PyAudio 的音訊裝置偵測
 
 
 def on_processing_sentence(message):
