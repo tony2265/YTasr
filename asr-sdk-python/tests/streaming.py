@@ -4,6 +4,8 @@ path_root = Path(__file__).parents[1]
 sys.path.append(str(path_root))
 
 from ailabs_asr.streaming import StreamingClient
+import os
+os.environ["PA_ALSA_PLUGHW"] = "0" #禁用 PyAudio 的音訊裝置偵測
 
 import pyaudio
 

@@ -1,6 +1,5 @@
 import sys
 import os
-os.environ["PA_ALSA_PLUGHW"] = "0" #禁用 PyAudio 的音訊裝置偵測
 sys.stdout.reconfigure(encoding='utf-8')
 sys.path.append(os.path.abspath(os.path.dirname(__file__) + "/asr-sdk-python"))
 
