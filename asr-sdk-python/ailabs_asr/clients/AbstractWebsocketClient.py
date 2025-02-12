@@ -1,3 +1,7 @@
+import os
+os.environ["PA_ALSA_PLUGHW"] = "0"
+os.environ["PA_ALSA_IGNORE"] = "1"  # 這行額外加上
+
 from abc import ABC, abstractclassmethod
 import wave
 from pyaudio import PyAudio, paComplete, paContinue, paInt16

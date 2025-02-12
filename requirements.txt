@@ -7,4 +7,4 @@ soundfile
 PyYAML>=6.0
 websocket-client>=1.3.2
 pyaudio
--e ./asr-sdk-python
+./asr-sdk-python
