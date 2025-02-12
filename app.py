@@ -2,7 +2,6 @@ import sys
 import os
 os.environ["PA_ALSA_PLUGHW"] = "0"
 os.environ["PA_ALSA_IGNORE"] = "1"  # 這行額外加上
-os.environ["PA_ALSA_IGNORE"] = "1"  # 這行額外加上
 
 sys.stdout.reconfigure(encoding='utf-8')
 sys.path.append(os.path.abspath(os.path.dirname(__file__) + "/asr-sdk-python"))
