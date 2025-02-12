@@ -1,5 +1,6 @@
 import sys
 sys.stdout.reconfigure(encoding='utf-8')
+sys.path.append(os.path.abspath(os.path.dirname(__file__) + "/asr-sdk-python"))
 
 from flask import Flask, request, jsonify
 from ailabs_asr.streaming import StreamingClient
