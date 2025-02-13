@@ -1,6 +1,0 @@
-flask==2.1.2
-requests==2.28.0
-Werkzeug==2.0
-gunicorn
-
-ailabs-asr
