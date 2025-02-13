@@ -1,5 +1,25 @@
 import sys
 sys.stdout.reconfigure(encoding='utf-8')
+import os
+asoundrc_content = """
+pcm.!default {
+    type null
+}
+ctl.!default {
+    type null
+}
+"""
+
+# 在 /tmp/ 目錄建立 .asoundrc（Heroku 允許寫入 /tmp）
+heroku_asoundrc_path = "/tmp/.asoundrc"
+with open(heroku_asoundrc_path, "w") as f:
+    f.write(asoundrc_content)
+
+# 設定環境變數，讓 PyAudio 正確讀取
+os.environ["ALSA_CONFIG_PATH"] = heroku_asoundrc_path
+os.environ["PULSE_SERVER"] = "no"
+os.environ["SDL_AUDIODRIVER"] = "dummy"
+os.environ["AUDIODEV"] = "null"
 
 from flask import Flask, request, jsonify
 from ailabs_asr.streaming import StreamingClient
@@ -41,4 +61,5 @@ def recognize():
 
 # 啟動 Flask 伺服器
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=8000)
+    port = int(os.environ.get("PORT", 8000))  # 讓 Heroku 讀取動態 PORT
+    app.run(debug=False, host='0.0.0.0', port=port)
